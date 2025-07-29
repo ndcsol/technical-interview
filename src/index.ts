@@ -3,20 +3,18 @@ import { Temporal } from 'temporal-polyfill'
 import { getDuffelFetchClient } from './axios';
 
 async function main(): Promise<void> {
-  const origin = process.argv[2];
-  const destination = process.argv[3];
   let slices;
   slices = (await getDuffelFetchClient().post('offer_requests', {
     "data": {
       "slices": [
         {
-          "origin": origin,
-          "destination": destination,
+          "origin": "YVR",
+          "destination": "YYZ",
           "departure_date": Temporal.Now.plainDateISO().add({ days: 7 }).toString().replace(/-/g, '-')
         },
         {
-          "origin": destination,
-          "destination": origin,
+          "origin": "YYZ",
+          "destination": "YVR",
           "departure_date": Temporal.Now.plainDateISO().add({ days: 14 }).toString().replace(/-/g, '-')
         }
       ],
